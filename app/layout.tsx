@@ -85,7 +85,7 @@ const jsonLd = {
   image: 'https://vanityfur.us/images/home-20page-20lady-20image.png',
   '@id': 'https://vanityfur.us',
   url: 'https://vanityfur.us',
-  telephone: '(770) 887-8880',
+  telephone: '(770) 617-1374',
   email: 'tracey@vanityfur.us',
   address: {
     '@type': 'PostalAddress',
