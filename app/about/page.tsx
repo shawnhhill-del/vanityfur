@@ -183,8 +183,8 @@ export default function AboutPage() {
                   asChild
                   className="bg-foreground text-background hover:bg-foreground/90 rounded-full"
                 >
-                  <a href="tel:7708878880">
-                    Call (770) 887-8880
+                  <a href="tel:7706171374">
+                    Call (770) 617-1374
                   </a>
                 </Button>
               </div>
