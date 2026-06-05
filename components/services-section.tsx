@@ -1,23 +1,38 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronDown, Scissors, Sparkles, Bath } from "lucide-react"
+import Link from "next/link"
+import { ChevronDown, Scissors, Sparkles, PawPrint, Stethoscope } from "lucide-react"
+import type { ReactNode } from "react"
 
-const services = [
+const services: { icon: typeof Scissors; title: string; description: ReactNode }[] = [
   {
     icon: Scissors,
-    title: "Dog & Cat Grooming",
-    description: "From breed-specific and show cuts to custom styles, senior pets, and special-care grooming, we tailor every service to your pet's individual needs."
+    title: "Noose-Free Dog Grooming",
+    description: "Grooming at Vanity Fur is 100% noose free! While it is the industry standard to restrain dogs by the neck with a \"Grooming Noose\", this is just another one of the many ways we stand apart! Our methods revolve around compassion, respect, common sense and safety. We connect with the heart and mind, not brute force and awkward struggle, with your pet dangling, suspended and strung up on a noose! I have always found the practice to be barbaric and unproductive."
   },
   {
     icon: Sparkles,
-    title: "Nail, Paw & Ear Care",
-    description: "Essential care to keep your pet comfortable. Nail trimming or grinding, paw pad cleanup, and gentle ear cleaning performed with patience and care."
+    title: "No-Sedation Cat Grooming",
+    description: (
+      <>
+        Most groomers sedate cats or refuse them entirely. We never sedate! You help hold and comfort your kitty through the 30-45 minute process, then take them home — the most stress free experience possible. Lion Cuts, Sanitary Trims, Expert matt removal, Nail Trims. Read our{" "}
+        <Link href="/reviews#cats" className="text-primary hover:underline font-medium">
+          reviews and testimonials
+        </Link>
+        !
+      </>
+    )
   },
   {
-    icon: Bath,
-    title: "Bath, Brush & Blowout",
-    description: "Maintenance grooming for pets who need a refresh. Includes premium bathing, blow-dry, brushing, and light touch-ups to keep coats clean, soft, and healthy."
+    icon: PawPrint,
+    title: "Nail Care",
+    description: "Grooming at Vanity Fur always comes with a nail trim. We also recommend a nail \"filing\" afterwards to further shorten, smooth and round the fresh cut edge on each nail. Notice the difference here too, where we stand apart! We file with a smooth high speed rotary tool with a diamond wheel, as opposed to most other places, \"grinding\" with rough low grit sandpaper disks on a dremel that create loud vibration and heat that dogs hate, fear and fight. Many pets have become nervous from this process at other places. We take our time, using gentle techniques to make the experience become stress free as possible and keep your dog's paws healthy and comfortable."
+  },
+  {
+    icon: Stethoscope,
+    title: "Ear Care",
+    description: "We understand the importance of ear health and proper maintenance! We know the delicate anatomy of the ear and breed specific requirements. Breeds that grow hair inside the canal will have that hair properly, painlessly and thoroughly removed before the bath. All dogs receive an ear lavage during the bath, flushing out all wax and debris or buildup, sending your pet home with PH balanced, clean, fresh, dry ears! You will also be made aware of any potential issues we observe like infections, yeast or allergy symptoms that might need further attention from your vet."
   }
 ]
 
@@ -75,9 +90,9 @@ export function ServicesSection() {
                 </div>
               </button>
               <div className={`overflow-hidden transition-all duration-500 ${
-                openIndex === index ? "max-h-40 pb-6 md:pb-8" : "max-h-0"
+                openIndex === index ? "max-h-[500px] pb-6 md:pb-8" : "max-h-0"
               }`}>
-                <p className="text-muted-foreground leading-relaxed pl-16 md:pl-20 pr-14">
+                <p className="text-muted-foreground leading-relaxed pl-4 sm:pl-16 md:pl-20 pr-4 sm:pr-14 text-sm sm:text-base">
                   {service.description}
                 </p>
               </div>

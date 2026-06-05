@@ -7,44 +7,25 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 
 export const metadata: Metadata = {
-  title: "About Us | Vanity Fur Pet Parlor - No-Noose Dog Grooming & Cat Grooming in Cumming, GA",
-  description: "Meet the team at Vanity Fur Pet Parlor in Cumming, GA. Family-owned since 1985, offering no-noose dog grooming and no-sedation cat grooming. Over 30 years of grooming mastery.",
-  keywords: ["no-noose dog grooming Cumming GA", "cat grooming Cumming GA", "pet grooming Cumming Georgia", "no sedation cat grooming"],
+  title: "About Us - Meet the Groomers | Vanity Fur Pet Parlor Cumming GA",
+  description: "Meet Tracey and the team at Vanity Fur Pet Parlor in Cumming, GA. Family-owned since 1985, offering noose-free dog grooming and no-sedation cat grooming in Forsyth County.",
+  keywords: ["noose-free dog grooming Cumming GA", "cat grooming Cumming GA", "pet grooming Forsyth County Georgia", "no sedation cat grooming", "pet groomers near me Cumming"],
+  alternates: {
+    canonical: 'https://vanityfur.us/about',
+  },
   openGraph: {
-    title: "About Vanity Fur Pet Parlor - No-Noose Pet Grooming in Cumming, GA",
-    description: "Family-owned since 1985. Compassionate, full-view, noose-free dog grooming and no-sedation cat grooming in Cumming, Georgia.",
+    title: "About Vanity Fur Pet Parlor - Noose-Free Pet Grooming Cumming GA",
+    description: "Family-owned since 1985. Compassionate, full-view, noose-free dog grooming and no-sedation cat grooming in Cumming, Georgia and Forsyth County.",
+    url: 'https://vanityfur.us/about',
   },
 }
-
-const coreValues = [
-  {
-    icon: Shield,
-    title: "Always Noose-Free",
-    description: "Your pet's safety is paramount. Our grooming is always noose-free, ensuring a comfortable and stress-free experience for every dog."
-  },
-  {
-    icon: Eye,
-    title: "Full-View Grooming",
-    description: "Complete transparency with front and back grooming areas visible and open cages. See exactly how your pet is being cared for."
-  },
-  {
-    icon: Heart,
-    title: "Compassionate Care",
-    description: "We are animal lovers and artists with over 30 years of grooming mastery. Every pet receives calm, species-respectful care."
-  },
-  {
-    icon: Star,
-    title: "Unmatched Quality",
-    description: "From show-quality extravagant grooming to simple baths and nail services, our breed-standard cuts and custom preferences are unmatched."
-  }
-]
 
 const team = [
   {
     name: "Tracey",
     role: "Owner & Master Groomer",
     initials: "T",
-    image: "/images/tracy.png",
+    image: "/images/tracey-with-dog.png",
     bio: "I grew up in Powder Springs on a small farm and have been passionate about my love for animals all of my life! I always dreamed of becoming a Vet and began working at an animal hospital at 18 and later as a Vet Tech. I discovered that to be a Vet was much too sad of a profession, surrounded by tragedy and death every day. I decided to follow my other passion, technical drawing and art as an Architect. But I did not find what I wanted at Southern Tech. I finally found my perfect fit when I met my mentor, Donna Haas, of Puppy Toes Grooming. I left college and began my apprenticeship with her in 1985. I have never looked back! This is truly my calling and I am so blessed to have a profession that I truly still enjoy and love, even after almost 35 years!"
   },
   {
@@ -89,31 +70,86 @@ export default function AboutPage() {
       {/* Core Values */}
       <section className="py-20 md:py-28 bg-card">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary text-sm font-medium rounded-full mb-6">
               What Sets Us Apart
             </span>
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-4">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-6">
               Our Core Principles
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              We are proficient in everything from show-quality extravagant grooming to simple baths and nail services. The quality of our work is unmatched and our prices are competitive.
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              We stand apart because we have over 30 years of practices developed around <strong className="text-foreground">kindness, respect, compassion, safety and common sense</strong>. Our techniques were developed to make pets feel secure, confident and proud, while their owners feel peace of mind and happy with the way their fur baby looks and feels at the end of the day, knowing that they were treated with love and excellence of care!
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
-            {coreValues.map((value, index) => (
-              <div 
-                key={index} 
-                className="bg-background rounded-3xl p-8 border border-border/50 hover:shadow-xl hover:shadow-primary/5 transition-all duration-500 group"
-              >
-                <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110">
-                  <value.icon className="w-7 h-7 text-primary" />
+          {/* Why We Are Different */}
+          <div className="max-w-4xl mx-auto mb-16">
+            <h3 className="font-serif text-2xl md:text-3xl font-semibold text-foreground text-center mb-8">
+              Why We Are Different
+            </h3>
+            <p className="text-center text-muted-foreground mb-10">
+              We proudly diverge from industry norms:
+            </p>
+            <div className="grid gap-3 sm:gap-4">
+              <div className="bg-background rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-border/50 flex items-start gap-3 sm:gap-4 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0">
+                  <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-3">{value.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{value.description}</p>
+                <div className="min-w-0">
+                  <h4 className="font-semibold text-foreground mb-1 text-sm sm:text-base">&quot;Grooming Nooses&quot;</h4>
+                  <p className="text-muted-foreground text-xs sm:text-sm">Never have and never will use or need them!</p>
+                </div>
               </div>
-            ))}
+              <div className="bg-background rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-border/50 flex items-start gap-3 sm:gap-4 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0">
+                  <Eye className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+                </div>
+                <div className="min-w-0">
+                  <h4 className="font-semibold text-foreground mb-1 text-sm sm:text-base">&quot;Full View&quot; Transparent Grooming</h4>
+                  <p className="text-muted-foreground text-xs sm:text-sm">For all to see, all day, every day.</p>
+                </div>
+              </div>
+              <div className="bg-background rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-border/50 flex items-start gap-3 sm:gap-4 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0">
+                  <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+                </div>
+                <div className="min-w-0">
+                  <h4 className="font-semibold text-foreground mb-1 text-sm sm:text-base">Nail &quot;Filing&quot; Instead of &quot;Grinding&quot;</h4>
+                  <p className="text-muted-foreground text-xs sm:text-sm">Your dog will enjoy gentle nail filing and happy healthy paws.</p>
+                </div>
+              </div>
+              <div className="bg-background rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-border/50 flex items-start gap-3 sm:gap-4 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0">
+                  <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+                </div>
+                <div className="min-w-0">
+                  <h4 className="font-semibold text-foreground mb-1 text-sm sm:text-base">Comprehensive Ear Care</h4>
+                  <p className="text-muted-foreground text-xs sm:text-sm">You can rely that your dog&apos;s ear canals will be comprehensively and competently cared for and reported on.</p>
+                </div>
+              </div>
+              <div className="bg-background rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-border/50 flex items-start gap-3 sm:gap-4 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0">
+                  <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+                </div>
+                <div className="min-w-0">
+                  <h4 className="font-semibold text-foreground mb-1 text-sm sm:text-base">Sedation-Free Interactive Cat Grooming</h4>
+                  <p className="text-muted-foreground text-xs sm:text-sm">No one else offers sedation-free, interactive, low-stress cat grooming where you are involved with every step and take your cat home immediately, happy and beautifully groomed.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Artists & Animal Lovers */}
+          <div className="max-w-3xl mx-auto text-center bg-background rounded-3xl p-8 md:p-12 border border-border/50">
+            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Star className="w-8 h-8 text-primary" />
+            </div>
+            <h3 className="font-serif text-2xl md:text-3xl font-semibold text-foreground mb-4">
+              Animal Lovers &amp; Artists
+            </h3>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              We are not just pet groomers. We are animal lovers and also artists. You get <strong className="text-foreground">BOTH</strong>! Each pet leaves us, our furry masterpiece, created with love!
+            </p>
           </div>
         </div>
       </section>
@@ -130,10 +166,10 @@ export default function AboutPage() {
                 A Unique Cat Grooming Experience
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                I <strong className="text-foreground">LOVE</strong> cats! I have been grooming cats since 1985. Through decades of hands-on experience, I have developed specialized techniques through real-world practice that allow me to offer a unique and compassionate grooming experience unavailable anywhere else.
+                I <strong className="text-foreground">LOVE</strong> cats! I have been grooming cats since 1985. Through decades of hands-on experience, I have developed specialized techniques that allow me to offer a unique and compassionate grooming experience unavailable anywhere else.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-                This experience takes place in the <strong className="text-foreground">&quot;Cat Room&quot;</strong> at Vanity Fur Pet Parlor — a quiet space infused with cat pheromones and calming visuals. Cat owners remain present during grooming to help comfort their cat as we work together to decide what is best.
+                This experience takes place in the <strong className="text-foreground">&quot;Cat Room&quot;</strong> at Vanity Fur Pet Parlor — a quiet space infused with cat pheromones and calming visuals. <strong className="text-foreground">You sit across the table, holding and comforting your cat</strong> while I groom. We decide everything together during the assessment — no surprises.
               </p>
 
               <div className="space-y-4 mb-8">
@@ -142,7 +178,7 @@ export default function AboutPage() {
                     <CheckCircle className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground">No Sedation Required</h4>
+                    <h4 className="font-semibold text-foreground">No Sedation — Ever</h4>
                     <p className="text-muted-foreground text-sm">Gentle techniques mean your cat stays calm naturally</p>
                   </div>
                 </div>
@@ -151,8 +187,8 @@ export default function AboutPage() {
                     <Heart className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground">Owner Stays Present</h4>
-                    <p className="text-muted-foreground text-sm">You remain with your cat to provide comfort and support</p>
+                    <h4 className="font-semibold text-foreground">You&apos;re With Your Cat</h4>
+                    <p className="text-muted-foreground text-sm">Sit across the table, hold and comfort your cat throughout</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -161,7 +197,7 @@ export default function AboutPage() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground">30-45 Minutes</h4>
-                    <p className="text-muted-foreground text-sm">Quick, efficient grooming with minimal stress. Cats leave beautifully groomed and return home immediately.</p>
+                    <p className="text-muted-foreground text-sm">Quick, efficient grooming. Cats go home immediately after.</p>
                   </div>
                 </div>
               </div>
@@ -193,8 +229,8 @@ export default function AboutPage() {
             <div className="relative">
               <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-muted">
                 <Image
-                  src="/images/tracey-white-cat.jpg"
-                  alt="Tracey with white fluffy Ragdoll cat - Cat grooming expert at Vanity Fur Pet Parlor Cumming GA"
+                  src="/images/tracey-with-cat.png"
+                  alt="Tracey holding a beautiful white Persian cat - Cat grooming expert at Vanity Fur Pet Parlor Cumming GA"
                   fill
                   className="object-cover"
                 />
@@ -243,7 +279,7 @@ export default function AboutPage() {
                   </div>
                 </div>
                 <div className="p-6">
-                  <p className="text-sm text-muted-foreground leading-relaxed line-clamp-6">{member.bio}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{member.bio}</p>
                 </div>
               </div>
             ))}
@@ -260,10 +296,10 @@ export default function AboutPage() {
         
         <div className="container relative mx-auto px-6 text-center">
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-background mb-6">
-            Ready to Experience the Vanity Fur Difference?
+            Book Your Pet&apos;s Next S&apos;Paw Day
           </h2>
           <p className="text-background/70 mb-10 max-w-xl mx-auto text-lg">
-            Book an appointment today and let us pamper your beloved pet with compassionate, noose-free grooming.
+            Experience the Vanity Fur difference with compassionate, noose-free grooming for dogs and no-sedation grooming for cats.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Button 

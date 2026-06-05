@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Mail, MapPin, PawPrint, Heart, Facebook, Instagram, Youtube } from "lucide-react"
+import { Mail, MapPin, PawPrint, Heart, Facebook, Instagram, Youtube, Phone } from "lucide-react"
 
 export function Footer() {
   return (
@@ -9,7 +9,7 @@ export function Footer() {
       <div className="absolute -top-20 right-8 md:right-20 lg:right-32 w-24 h-28 md:w-28 md:h-32 z-50 pointer-events-none">
         <Image
           src="/images/kitten-20hanging.png"
-          alt="Cute kitten peeking"
+          alt="Adorable kitten peeking over footer - Vanity Fur Pet Parlor cat grooming Cumming GA"
           fill
           className="object-contain"
           style={{ filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.3))' }}
@@ -32,6 +32,10 @@ export function Footer() {
               Premium pet grooming with genuine care and compassion. Family-owned and operated since 1985.
             </p>
             <div className="space-y-3 mb-6">
+              <a href="tel:7706171374" className="flex items-center gap-3 text-sm text-background/70 hover:text-primary transition-colors">
+                <Phone className="w-4 h-4" />
+                <span>(770) 617-1374<br /><span className="text-xs text-background/50">Press 2 for cats</span></span>
+              </a>
               <a href="mailto:tracey@vanityfur.us" className="flex items-center gap-3 text-sm text-background/70 hover:text-primary transition-colors">
                 <Mail className="w-4 h-4" />
                 tracey@vanityfur.us
@@ -102,8 +106,10 @@ export function Footer() {
               {[
                 { href: "/", label: "Home" },
                 { href: "/about", label: "About Us" },
-                { href: "/#services", label: "Services" },
-                { href: "/about#team", label: "Our Groomers" },
+                { href: "/services", label: "Our Services" },
+                { href: "/gallery", label: "Gallery" },
+                { href: "/reviews", label: "Reviews" },
+                { href: "/blog", label: "Blog" },
                 { href: "/contact", label: "Book an Appointment" },
               ].map((link) => (
                 <li key={link.href}>
@@ -123,13 +129,18 @@ export function Footer() {
             <h3 className="font-semibold text-background mb-6">Services</h3>
             <ul className="space-y-3">
               {[
-                "Bath, Brush & Blowout",
-                "Nail, Paw & Ear Care",
-                "Specialty & Custom Grooming",
+                { href: "/services#dog-services", label: "Dog Grooming" },
+                { href: "/services#cat-services", label: "Cat Grooming" },
+                { href: "/services", label: "All Services" },
               ].map((service) => (
-                <li key={service} className="flex items-center gap-2 text-sm text-background/70">
-                  <PawPrint className="w-3 h-3 text-primary" />
-                  {service}
+                <li key={service.href}>
+                  <Link 
+                    href={service.href} 
+                    className="flex items-center gap-2 text-sm text-background/70 hover:text-primary transition-colors"
+                  >
+                    <PawPrint className="w-3 h-3 text-primary" />
+                    {service.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -171,7 +182,7 @@ export function Footer() {
         <div className="relative w-[350px] md:w-[450px] lg:w-[550px] h-24 md:h-32 lg:h-40">
           <Image
             src="/images/doggies-20on-20buttom.png"
-            alt="Happy dogs and cat"
+            alt="Happy groomed dogs and cats - Professional pet grooming at Vanity Fur Pet Parlor Forsyth County"
             fill
             className="object-contain object-right-bottom"
           />

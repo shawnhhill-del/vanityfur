@@ -26,8 +26,8 @@ const contactInfo = [
     icon: Phone,
     title: "Phone",
     description: "Give us a call during business hours",
-    value: "(770) 555-1234",
-    href: "tel:+17705551234"
+    value: "(770) 617-1374",
+    href: "tel:+17706171374"
   },
   {
     icon: Mail,
@@ -76,6 +76,7 @@ export default function ContactPage() {
     phone: "",
     petName: "",
     petType: "",
+    breed: "",
     service: "",
     preferredDate: "",
     preferredTime: "",
@@ -108,6 +109,7 @@ export default function ContactPage() {
           phone: "",
           petName: "",
           petType: "",
+          breed: "",
           service: "",
           preferredDate: "",
           preferredTime: "",
@@ -137,10 +139,25 @@ export default function ContactPage() {
             Get In Touch
           </span>
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground mb-6">
-            Contact Us
+            Book Your Pet&apos;s S&apos;Paw Day
           </h1>
-          <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
-            We&apos;d love to hear from you. Reach out to schedule an appointment or ask any questions about our services.
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed mb-8">
+            We&apos;d love to hear from you. Call to schedule an appointment or fill out our contact form.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button 
+              asChild
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 h-14"
+            >
+              <a href="tel:7706171374">
+                <Phone className="mr-2 w-5 h-5" />
+                Call Now
+              </a>
+            </Button>
+          </div>
+          <p className="mt-4 text-sm text-muted-foreground">
+            <span className="font-medium text-foreground">(770) 617-1374</span> — Press 2 for cat appointments
           </p>
         </div>
       </section>
@@ -215,7 +232,7 @@ export default function ContactPage() {
                     <Input
                       id="phone"
                       type="tel"
-                      placeholder="(770) 555-1234"
+                      placeholder="(770) 617-1374"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       required
@@ -249,19 +266,30 @@ export default function ContactPage() {
                     </Select>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="service" className="text-foreground">Service Interested In</Label>
-                    <Select onValueChange={(value) => setFormData({ ...formData, service: value })}>
-                      <SelectTrigger className="h-12 bg-background border-border">
-                        <SelectValue placeholder="Select a service" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="full-grooming">Full Grooming</SelectItem>
-                        <SelectItem value="bath-brush">Bath, Brush & Blowout</SelectItem>
-                        <SelectItem value="nail-care">Nail, Paw & Ear Care</SelectItem>
-                        <SelectItem value="specialty">Specialty Grooming</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <Label htmlFor="breed" className="text-foreground">Breed</Label>
+                    <Input
+                      id="breed"
+                      placeholder="e.g. Golden Retriever, Persian"
+                      value={formData.breed}
+                      onChange={(e) => setFormData({ ...formData, breed: e.target.value })}
+                      className="h-12 bg-background border-border focus:border-primary"
+                    />
                   </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="service" className="text-foreground">Service Interested In</Label>
+                  <Select onValueChange={(value) => setFormData({ ...formData, service: value })}>
+                    <SelectTrigger className="h-12 bg-background border-border">
+                      <SelectValue placeholder="Select a service" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="full-grooming">Full Grooming</SelectItem>
+                      <SelectItem value="bath-brush">Bath, Brush & Blowout</SelectItem>
+                      <SelectItem value="nail-care">Nail, Paw & Ear Care</SelectItem>
+                      <SelectItem value="specialty">Specialty Grooming</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-5">

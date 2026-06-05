@@ -1,92 +1,167 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server"
 
-// Twilio credentials - set these in your environment variables
-const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID
-const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN
-const TWILIO_PHONE_NUMBER = process.env.TWILIO_PHONE_NUMBER
-const OWNER_PHONE_NUMBER = process.env.OWNER_PHONE_NUMBER || '+17708878880' // Vanity Fur phone
+const PUSHOVER_APP_TOKEN = process.env.PUSHOVER_APP_TOKEN
+const PUSHOVER_USER_KEY = process.env.PUSHOVER_USER_KEY
+const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL
+const RESEND_API_KEY = process.env.RESEND_API_KEY
+
+async function sendPushover(title: string, message: string, url?: string) {
+  const params = new URLSearchParams({
+    token: PUSHOVER_APP_TOKEN!,
+    user: PUSHOVER_USER_KEY!,
+    title,
+    message,
+    html: "1",
+    priority: "1",
+    sound: "cashregister",
+  })
+
+  if (url) {
+    params.set("url", url)
+    params.set("url_title", "Reply via Email")
+  }
+
+  const res = await fetch("https://api.pushover.net/1/messages.json", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: params.toString(),
+  })
+
+  if (!res.ok) {
+    const errorData = await res.json()
+    throw new Error(`Pushover error: ${JSON.stringify(errorData)}`)
+  }
+
+  return res.json()
+}
+
+async function sendEmail(to: string, subject: string, text: string, replyTo?: string) {
+  if (!RESEND_API_KEY) return null
+
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: "Vanity Fur <support@bindriveshine.com>",
+      to: [to],
+      subject,
+      text,
+      ...(replyTo ? { reply_to: replyTo } : {}),
+    }),
+  })
+
+  if (!res.ok) {
+    const errorData = await res.json()
+    console.error("Resend email error:", errorData)
+  }
+
+  return res.json()
+}
 
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { name, email, phone, petName, petType, service, preferredDate, preferredTime, message } = body
+    const {
+      name,
+      email,
+      phone,
+      petName,
+      petType,
+      breed,
+      service,
+      preferredDate,
+      preferredTime,
+      message,
+    } = body
 
-    // Validate required fields
     if (!name || !email || !phone || !message) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
+        { error: "Missing required fields" },
+        { status: 400 },
       )
     }
 
-    // Format the SMS message
-    const smsMessage = `
-NEW CONTACT FORM SUBMISSION
----------------------------
+    // Format pet info with breed
+    const petInfo = petName 
+      ? `${petName}${petType ? ` (${petType}${breed ? ` - ${breed}` : ""})` : breed ? ` - ${breed}` : ""}`
+      : petType 
+        ? `${petType}${breed ? ` - ${breed}` : ""}`
+        : breed || null
+
+    // Pushover notification message (supports HTML)
+    const pushoverMessage = [
+      `<b>Name:</b> ${name}`,
+      `<b>Phone:</b> ${phone}`,
+      `<b>Email:</b> ${email}`,
+      petInfo ? `<b>Pet:</b> ${petInfo}` : null,
+      service ? `<b>Service:</b> ${service}` : null,
+      preferredDate ? `<b>Date:</b> ${preferredDate}` : null,
+      preferredTime ? `<b>Time:</b> ${preferredTime}` : null,
+      "",
+      message,
+    ]
+      .filter((line) => line !== null)
+      .join("\n")
+
+    // Full details for email backup
+    const fullEmailBody = `
+New Contact Form Submission
+============================
 Name: ${name}
 Phone: ${phone}
 Email: ${email}
-${petName ? `Pet: ${petName} (${petType || 'Not specified'})` : ''}
-${service ? `Service: ${service}` : ''}
-${preferredDate ? `Preferred Date: ${preferredDate}` : ''}
-${preferredTime ? `Preferred Time: ${preferredTime}` : ''}
+${petName ? `Pet Name: ${petName}` : ""}
+${petType ? `Pet Type: ${petType}` : ""}
+${breed ? `Breed: ${breed}` : ""}
+${service ? `Service Requested: ${service}` : ""}
+${preferredDate ? `Preferred Date: ${preferredDate}` : ""}
+${preferredTime ? `Preferred Time: ${preferredTime}` : ""}
 
-Message: ${message}
-
-Reply directly to this number to contact the customer: ${phone}
+Message:
+${message}
 `.trim()
 
-    // Check if Twilio is configured
-    if (TWILIO_ACCOUNT_SID && TWILIO_AUTH_TOKEN && TWILIO_PHONE_NUMBER) {
-      // Send SMS via Twilio
-      const twilioUrl = `https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/Messages.json`
-      
-      const twilioResponse = await fetch(twilioUrl, {
-        method: 'POST',
-        headers: {
-          'Authorization': 'Basic ' + Buffer.from(`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`).toString('base64'),
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
-          To: OWNER_PHONE_NUMBER,
-          From: TWILIO_PHONE_NUMBER,
-          Body: smsMessage,
-        }),
-      })
-
-      if (!twilioResponse.ok) {
-        const errorData = await twilioResponse.json()
-        console.error('Twilio error:', errorData)
-        // Still return success to user, but log the error
-        return NextResponse.json({ 
-          success: true, 
-          message: 'Your message has been received. We will contact you soon!',
-          smsStatus: 'pending'
-        })
+    // Send push notification via Pushover
+    if (PUSHOVER_APP_TOKEN && PUSHOVER_USER_KEY) {
+      try {
+        await sendPushover(
+          `New Booking: ${name}`,
+          pushoverMessage,
+          `mailto:${email}`,
+        )
+      } catch (pushError) {
+        console.error("Pushover send failed:", pushError)
       }
-
-      return NextResponse.json({ 
-        success: true, 
-        message: 'Your message has been sent! We will text you back shortly.',
-        smsStatus: 'sent'
-      })
+    } else {
+      console.log("Pushover not configured. Message:", pushoverMessage)
     }
 
-    // If Twilio is not configured, just log and return success
-    console.log('Contact form submission (SMS not configured):')
-    console.log(smsMessage)
-    
-    return NextResponse.json({ 
-      success: true, 
-      message: 'Your message has been received. We will contact you soon!',
-      smsStatus: 'not_configured'
-    })
+    // Also send full email notification if Resend is configured
+    if (RESEND_API_KEY && NOTIFICATION_EMAIL) {
+      try {
+        await sendEmail(
+          NOTIFICATION_EMAIL,
+          `New Booking Request from ${name}`,
+          fullEmailBody,
+          email,
+        )
+      } catch (emailError) {
+        console.error("Email send failed:", emailError)
+      }
+    }
 
+    return NextResponse.json({
+      success: true,
+      message: "Your message has been sent! We will contact you shortly.",
+    })
   } catch (error) {
-    console.error('Contact form error:', error)
+    console.error("Contact form error:", error)
     return NextResponse.json(
-      { error: 'Failed to process your request. Please try again.' },
-      { status: 500 }
+      { error: "Failed to process your request. Please try again." },
+      { status: 500 },
     )
   }
 }

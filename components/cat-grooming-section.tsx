@@ -17,7 +17,7 @@ export function CatGroomingSection() {
           <div className="relative order-2 lg:order-1">
             <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-muted shadow-2xl">
               <Image
-                src="/images/tracey-white-cat.jpg"
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Cat-2x5CAY6Puvhv30adeAyqNxPYaXuupb.png"
                 alt="Tracey with white fluffy cat - Cat grooming expert at Vanity Fur Pet Parlor Cumming GA"
                 fill
                 className="object-cover"
@@ -43,14 +43,33 @@ export function CatGroomingSection() {
               Specialized Cat Grooming
             </span>
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-6 leading-tight">
-              A Unique Cat Grooming Experience
+              No-Sedation Cat Grooming
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-              I <strong className="text-foreground">LOVE</strong> cats! Through decades of hands-on experience since 1985, I have developed specialized techniques that allow me to offer a unique and compassionate grooming experience unavailable anywhere else.
+              Specialized techniques developed over decades, enable me to offer a unique, compassionate and interactive grooming experience for both you and your cat that is unavailable anywhere else! You stay, help hold and comfort your kitty and return home with your beautifully groomed happy cat!
             </p>
             <p className="text-muted-foreground leading-relaxed mb-8">
-              Cat grooming takes place in our dedicated <strong className="text-foreground">&quot;Cat Room&quot;</strong> — a quiet space infused with calming pheromones. Owners stay present during grooming to comfort their cat. No sedation required.
+              Read our{" "}
+              <Link href="/reviews#cats" className="text-primary hover:underline font-medium">
+                testimonials and reviews
+              </Link>
+              !
             </p>
+
+            {/* Phone Callout */}
+            <div className="bg-card border border-border/50 rounded-2xl p-5 mb-8">
+              <a href="tel:7706171374" className="flex items-start gap-4 group">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
+                  <Phone className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <p className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">(770) 617-1374</p>
+                  <p className="text-sm text-muted-foreground">
+                    Press <strong className="text-foreground">2</strong> for Cat Grooming appointments
+                  </p>
+                </div>
+              </a>
+            </div>
 
             <div className="flex flex-wrap gap-4">
               <Button 
@@ -69,9 +88,9 @@ export function CatGroomingSection() {
                 size="lg"
                 className="rounded-full px-8 h-12 border-2 border-border hover:border-primary/50 bg-transparent transition-all duration-300"
               >
-                <a href="tel:7708878880">
+                <a href="tel:7706171374">
                   <Phone className="mr-2 w-4 h-4" />
-                  Book by Phone
+                  Call Now
                 </a>
               </Button>
             </div>

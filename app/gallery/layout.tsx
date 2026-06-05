@@ -2,12 +2,16 @@ import React from "react"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Dogs & Kittens Pampered | Vanity Fur Pet Parlor - Pet Grooming Gallery Cumming, GA",
-  description: "Browse our gallery of pampered dogs and kittens at Vanity Fur Pet Parlor in Cumming, GA. Over 30 years of noose-free dog grooming and no-sedation cat grooming excellence.",
-  keywords: ["pet grooming gallery Cumming GA", "dog grooming photos", "cat grooming photos", "no-noose dog grooming"],
+  title: "Pet Grooming Gallery - Dog & Cat Photos | Vanity Fur Cumming GA",
+  description: "View our gallery of beautifully groomed dogs and cats at Vanity Fur Pet Parlor in Cumming, GA. See examples of noose-free dog grooming and no-sedation cat grooming in Forsyth County.",
+  keywords: ["pet grooming photos Cumming GA", "dog grooming gallery Forsyth County", "cat grooming before after", "Vanity Fur gallery", "pet grooming near me"],
+  alternates: {
+    canonical: 'https://vanityfur.us/gallery',
+  },
   openGraph: {
-    title: "Dogs & Kittens Pampered - Vanity Fur Pet Parlor Gallery",
-    description: "See beautiful dog and cat grooming transformations from Cumming, GA's premier no-noose pet salon.",
+    title: "Pet Grooming Gallery | Vanity Fur Pet Parlor Cumming GA",
+    description: "Browse photos and videos of beautifully groomed pets at Vanity Fur. Over 35 years of grooming mastery in Cumming, Georgia.",
+    url: 'https://vanityfur.us/gallery',
   },
 }
 

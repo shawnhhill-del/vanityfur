@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useState, useEffect } from "react"
-import { Menu, X, PawPrint } from "lucide-react"
+import { Menu, X, PawPrint, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 
@@ -43,8 +43,11 @@ export function Header() {
             {[
               { href: "/", label: "Home" },
               { href: "/about", label: "About" },
+              { href: "/services", label: "Services" },
+              { href: "/locations", label: "Locations" },
               { href: "/gallery", label: "Gallery" },
               { href: "/reviews", label: "Reviews" },
+              { href: "/blog", label: "Blog" },
               { href: "/contact", label: "Contact" },
             ].map((link) => (
               <Link
@@ -63,23 +66,42 @@ export function Header() {
             <ThemeToggle />
             <Button 
               asChild
+              variant="outline"
+              className="rounded-full px-4 h-10"
+            >
+              <a href="tel:7706171374" title="Call (770) 617-1374 - Press 2 for cats">
+                <Phone className="w-4 h-4" />
+              </a>
+            </Button>
+            <Button 
+              asChild
               className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-6 transition-all duration-300 hover:shadow-lg hover:shadow-foreground/20 hover:-translate-y-0.5"
             >
               <Link href="/contact">Book Appointment</Link>
             </Button>
           </div>
 
-          {/* Mobile Theme Toggle & Menu Button */}
+          {/* Mobile Buttons */}
           <div className="md:hidden flex items-center gap-1">
+            <Button 
+              asChild
+              variant="ghost"
+              size="icon"
+              className="rounded-full w-9 h-9"
+            >
+              <a href="tel:7706171374" title="Call (770) 617-1374">
+                <Phone className="w-4 h-4" />
+              </a>
+            </Button>
             <ThemeToggle />
             <button
               type="button"
-              className="p-3 text-foreground hover:bg-muted rounded-full transition-colors flex items-center justify-center"
+              className="p-2 text-foreground hover:bg-muted rounded-full transition-colors flex items-center justify-center"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
             >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
@@ -88,16 +110,19 @@ export function Header() {
         <div 
           className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
             isMenuOpen 
-              ? "max-h-[400px] opacity-100 mt-4 pointer-events-auto" 
+              ? "max-h-[600px] opacity-100 mt-4 pointer-events-auto" 
               : "max-h-0 opacity-0 pointer-events-none"
           }`}
         >
-          <nav className="flex flex-col gap-1 pb-4 bg-card/95 rounded-xl p-2">
+          <nav className="flex flex-col gap-1 pb-4 bg-card/95 rounded-xl p-3">
             {[
               { href: "/", label: "Home" },
               { href: "/about", label: "About" },
+              { href: "/services", label: "Services" },
+              { href: "/locations", label: "Locations" },
               { href: "/gallery", label: "Gallery" },
               { href: "/reviews", label: "Reviews" },
+              { href: "/blog", label: "Blog" },
               { href: "/contact", label: "Contact" },
             ].map((link) => (
               <Link
@@ -113,8 +138,12 @@ export function Header() {
               asChild
               className="mt-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded-full h-12"
             >
-              <Link href="/contact" onClick={() => setIsMenuOpen(false)}>Book Appointment</Link>
+              <a href="tel:7706171374" onClick={() => setIsMenuOpen(false)}>
+                <Phone className="mr-2 w-4 h-4" />
+                Call (770) 617-1374
+              </a>
             </Button>
+            <p className="mt-2 text-xs text-center text-muted-foreground">Press 2 for cat appointments</p>
           </nav>
         </div>
       </div>
